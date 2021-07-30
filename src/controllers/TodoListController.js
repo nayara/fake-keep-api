@@ -17,6 +17,20 @@ exports.post = (req, res) => {
 exports.delete = (req, res) => {
   TodoList.findByIdAndDelete(req.body.id, (err) => {
     if (err) res.json({ status: 400, message: "error" });
-    res.json({ status: 200, message: `Deleted '${req.body.id}' with success` })
+    res.json({ status: 200, message: `Deleted '${req.body.id}' with success` });
   });
+};
+
+exports.update = (req, res) => {
+  TodoList.findByIdAndUpdate(
+    req.params.id,
+    { items: req.body.items },
+    (err) => {
+      if (err) res.json({ status: 400, message: "error" });
+      res.json({
+        status: 200,
+        message: `Uptaded '${req.params.id}' with success`,
+      });
+    }
+  );
 };
